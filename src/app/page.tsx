@@ -61,12 +61,13 @@ export default function Home() {
      
 
      try {
-      const fieldNames = step === 1 
+      const fieldNames: (keyof FormValues | `${keyof FormValues}.${string}`)[] = 
+      step === 1 
       ? ['personalInfo.fullName', 'personalInfo.email', 'personalInfo.phoneNumber']
       : step === 2
       ? ['addressDetails.streetAddress', 'addressDetails.city', 'addressDetails.zipCode']
       : ['accountSetup.username', 'accountSetup.password', 'accountSetup.confirmPassword'];
-      const isValid = await methods.trigger(fieldNames);
+      const isValid = await methods.trigger(fieldNames as FieldName<FormValues>[]);
  
     
     if (!isValid) {
