@@ -11,7 +11,7 @@ export function useMultiStepForm() {
     accountSetup: undefined,
   });
 
-  const updateFormData = (section: keyof FormValues, values: any) => {
+  const updateFormData = (section: keyof FormValues, values: FormValues[keyof FormValues]) => {
     setData((prev) => ({
       ...prev,
       [section]: values,

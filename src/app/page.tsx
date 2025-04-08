@@ -13,9 +13,7 @@ import FormNavigation from "@/components/FormNavigation";
 import { useMutation } from "@tanstack/react-query";
 import ThemeToggle from "@/components/ThemeToggle";  
 import { toast } from "react-toastify";
-import { useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
-import Image from "next/image"; 
+import { useState } from "react"; 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 export default function Home() {
   const [submittedSuccess, setSubmittedSuccess ] = useState(false)
@@ -50,11 +48,11 @@ export default function Home() {
       });
       return await response.json();
     },
-    onSuccess: (data) => { 
+    onSuccess: () => { 
       toast.success("Form submitted successfully!");
       setSubmittedSuccess(true)
     },
-    onError: (error) => { 
+    onError: () => { 
       toast.error("Submission failed. Please try again.");
     },
   });
@@ -95,10 +93,8 @@ export default function Home() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault(); 
 
-    methods.trigger().then(isValid => {
-      const formData = methods.getValues();
+    const formData = methods.getValues();
         onSubmitt(formData);
-    });
 
   };
    
