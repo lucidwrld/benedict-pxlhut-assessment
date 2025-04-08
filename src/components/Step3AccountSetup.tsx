@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormErrors } from "@/hooks/useFormErrors";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -9,6 +10,8 @@ export default function Step3AccountSetup() {
     register,
     formState: { errors },
   } = useFormContext();
+  
+    const { getError } = useFormErrors();
   const [showPassword1, setShowPassword1] = useState(false)
   const [showPassword2, setShowPassword2] = useState(false)
   return (
@@ -22,9 +25,9 @@ export default function Step3AccountSetup() {
           {...register("accountSetup.username")}
           className="mt-1 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
         />
-        {errors.accountSetup?.username && (
+        {getError('accountSetup.username') && (
           <p className="mt-1 text-sm text-red-600">
-            {errors.accountSetup.username.message as string}
+            {getError('accountSetup.username')}
           </p>
         )}
       </div>
@@ -42,9 +45,9 @@ export default function Step3AccountSetup() {
         </div>
         </div>
         
-        {errors.accountSetup?.password && (
+        {getError('accountSetup.password') && (
           <p className="mt-1 text-sm text-red-600">
-            {errors.accountSetup.password.message as string}
+            {getError('accountSetup.password') }
           </p>
         )}
       </div>
@@ -61,9 +64,9 @@ export default function Step3AccountSetup() {
           {showPassword2 ? <FaEye size={15} color="black"/> : <FaEyeSlash size={15} color="black"/>}
         </div>
         </div>
-        {errors.accountSetup?.confirmPassword && (
+        {getError('accountSetup.confirmPassword') && (
           <p className="mt-1 text-sm text-red-600">
-            {errors.accountSetup.confirmPassword.message as string}
+            {getError('accountSetup.confirmPassword')}
           </p>
         )}
       </div>

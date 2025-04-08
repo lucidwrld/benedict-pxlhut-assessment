@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormErrors } from "@/hooks/useFormErrors";
 import { useFormContext } from "react-hook-form";
 
 export default function Step2AddressDetails() {
@@ -8,6 +9,7 @@ export default function Step2AddressDetails() {
     formState: { errors },
   } = useFormContext();
 
+  const { getError } = useFormErrors();
   return (
     <div className="space-y-4">
       <h2 className="text-xl text-black dark:text-white font-semibold">Address Details</h2>
@@ -18,9 +20,9 @@ export default function Step2AddressDetails() {
           {...register("addressDetails.streetAddress")}
           className="mt-1 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
         />
-        {errors.addressDetails?.streetAddress && (
+        {getError('addressDetails.streetAddress') && (
           <p className="mt-1 text-sm text-red-600">
-            {errors.addressDetails.streetAddress.message as string}
+            {getError('addressDetails.streetAddress')}
           </p>
         )}
       </div>
@@ -31,9 +33,9 @@ export default function Step2AddressDetails() {
           {...register("addressDetails.city")}
           className="mt-1 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
         />
-        {errors.addressDetails?.city && (
+        {getError('addressDetails.city') && (
           <p className="mt-1 text-sm text-red-600">
-            {errors.addressDetails.city.message as string}
+            {getError('addressDetails.city')}
           </p>
         )}
       </div>
@@ -44,9 +46,9 @@ export default function Step2AddressDetails() {
           {...register("addressDetails.zipCode")}
           className="mt-1 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
         />
-        {errors.addressDetails?.zipCode && (
+        {getError('addressDetails.zipCode') && (
           <p className="mt-1 text-sm text-red-600">
-            {errors.addressDetails.zipCode.message as string}
+            {getError('addressDetails.zipCode')}
           </p>
         )}
       </div>
