@@ -6,8 +6,7 @@ import { useFormContext } from "react-hook-form";
 
 export default function Step1PersonalInfo() {
   const {
-    register,
-    formState: { errors },
+    register, 
   } = useFormContext();
   const { getError } = useFormErrors();
 

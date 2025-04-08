@@ -5,8 +5,7 @@ import { useFormContext } from "react-hook-form";
 
 export default function Step2AddressDetails() {
   const {
-    register,
-    formState: { errors },
+    register, 
   } = useFormContext();
 
   const { getError } = useFormErrors();

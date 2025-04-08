@@ -7,8 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function Step3AccountSetup() {
   const {
-    register,
-    formState: { errors },
+    register, 
   } = useFormContext();
   
     const { getError } = useFormErrors();
