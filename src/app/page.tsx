@@ -15,6 +15,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { toast } from "react-toastify";
 import { useState } from "react"; 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+type FieldName<T> = keyof T | `${keyof T & string}.${keyof T[keyof T] & string}`;
 export default function Home() {
   const [submittedSuccess, setSubmittedSuccess ] = useState(false)
   const {
@@ -56,7 +57,7 @@ export default function Home() {
       toast.error("Submission failed. Please try again.");
     },
   });
-  type FieldName<T> = keyof T | `${keyof T & string}.${keyof T[keyof T] & string}`;
+  
 
   const onSubmitt = async (values: FormValues) => {
      
@@ -75,10 +76,14 @@ export default function Home() {
       console.log("Validation failed, not proceeding");
       return;
     }
-    updateFormData(
-      step === 1 ? "personalInfo" : step === 2 ? "addressDetails" : "accountSetup",
-      values
-    );
+     
+    if (step === 1) {
+      updateFormData('personalInfo', values.personalInfo);
+    } else if (step === 2) {
+      updateFormData('addressDetails', values.addressDetails);
+    } else {
+      updateFormData('accountSetup', values.accountSetup);
+    }
 
       
       if (!isLastStep) {
@@ -89,7 +94,12 @@ export default function Home() {
         submitForm(values);
       }
     } catch (error) { 
-      toast.error("Form submission error:", error);
+      if (error instanceof Error) {
+        toast.error(`Form submission error: ${error.message}`);
+      } else {
+        toast.error('An unexpected error occurred during form submission');
+      }
+    
     }  
   };
   const handleFormSubmit = (e: React.FormEvent) => {

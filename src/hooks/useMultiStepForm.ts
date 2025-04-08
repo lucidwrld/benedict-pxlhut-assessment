@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { FormValues } from "../lib/validationSchema";
+type FormSection = {
+  personalInfo: FormValues['personalInfo'];
+  addressDetails: FormValues['addressDetails'];
+  accountSetup: FormValues['accountSetup'];
+};
 
 export function useMultiStepForm() {
   const [step, setStep] = useState(1);
@@ -11,7 +16,10 @@ export function useMultiStepForm() {
     accountSetup: undefined,
   });
 
-  const updateFormData = (section: keyof FormValues, values: FormValues[keyof FormValues]) => {
+  const updateFormData = <T extends keyof FormSection>(
+    section: T,
+    values: FormSection[T]
+  ) =>{
     setData((prev) => ({
       ...prev,
       [section]: values,
